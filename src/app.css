@@ -81,8 +81,14 @@ pre {
 	white-space: nowrap;
 }
 
-.input, .input-old {
-	display: inline;
+input, .input-old {
+	background: transparent;
+  	border: none;
+  	display: inline;
+  	font-family: monospace;
+  	white-space: nowrap;
+	color: var(--color-text-primary);
+	outline: none;
 }
 
 .terminal-container {

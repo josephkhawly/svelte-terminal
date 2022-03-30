@@ -5,6 +5,8 @@
 <script>
 	import { onMount } from 'svelte'
 	import dayjs from 'dayjs'
+	import { handle } from '$lib/bin'
+
 	$: timeString = () => dayjs().format('hh:mm:ss A')
 	$: dateString = () => dayjs().format('ddd MMM DD')
 	let dateTime = ''
@@ -14,6 +16,14 @@
 	function startTime() {
 		dateTime = `${dateString()} ${timeString()}`
 		setTimeout(startTime, 500)
+	}
+
+	function handleKeypress(e) {
+		if (e.key === 'Enter') {
+			e.preventDefault()
+			const output = handle(termInput.value)
+			termInput.value = ''
+		}
 	}
 
 	onMount(() => {
@@ -28,6 +38,12 @@
 
 <div class="terminal" on:click={() => termInput.focus()}>
 	<p class="prompt">joseph@mac:$&nbsp;</p>
-	<pre class="input" contenteditable="true" spellcheck="false" bind:this={termInput} />
+	<input
+		class="input"
+		type="text"
+		spellcheck="false"
+		bind:this={termInput}
+		on:keydown={handleKeypress}
+	/>
 </div>
 <div class="clock">{dateTime}</div>
