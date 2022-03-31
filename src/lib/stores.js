@@ -4,9 +4,15 @@ import dayjs from 'dayjs'
 
 const userStored = browser && window.localStorage.getItem('userName')
 export const user = writable(userStored || 'guest')
+user.subscribe((name) => {
+	if (browser) window.localStorage.setItem('userName', name)
+})
 
 const machineStored = browser && window.localStorage.getItem('userMachine')
 export const machine = writable(machineStored || 'start')
+machine.subscribe((name) => {
+	if (browser) window.localStorage.setItem('userMachine', name)
+})
 
 export const dateTime = readable(dayjs().format('ddd MMM DD hh:mm:ss A'), function start(set) {
 	set(dayjs().format('ddd MMM DD hh:mm:ss A'))
