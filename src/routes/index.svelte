@@ -4,39 +4,39 @@
 <script>
 	import { onMount } from 'svelte'
 	import { handle } from '$lib/bin'
-	import { dateTime, user, machine } from '$lib/stores'
+	import { dateTime, user, machine, history } from '$lib/stores'
 	import Weather from '$lib/Weather.svelte'
 
-	let history = []
 	let lineData = []
-	let histIndex = 0
+	let histIndex = $history.length
 
-	let termInput, command
+	let termInput
 
 	function handleKeypress(e) {
 		if (e.key === 'Enter') {
 			e.preventDefault()
+			let command = termInput.value
 			const output = handle(command)
 			lineData[lineData.length] = { command, output }
 			termInput.value = ''
 
-			if (command === '' || /^[ ]+$/.test(command) || history[0] === command) return
+			if (command === '' || /^[ ]+$/.test(command) || $history[$history.length - 1] === command) return
 
-			history[history.length] = command
-			// histIndex = history.length
+			$history[$history.length] = command
+			histIndex = $history.length
 		} else if (e.key === 'ArrowUp') {
 			e.preventDefault()
-			if (histIndex < history.length) {
-				histIndex++
-				termInput.value = history[history.length - histIndex]
+			if (histIndex > 0) {
+				histIndex--
+				termInput.value = $history[histIndex]
 			}
 		} else if (e.key === 'ArrowDown') {
 			e.preventDefault()
-			if (histIndex > 1) {
-				histIndex--
-				termInput.value = history[history.length - histIndex]
+			if (histIndex < $history.length - 1) {
+				histIndex++
+				termInput.value = $history[histIndex]
 			} else {
-				histIndex = 0
+				histIndex = $history.length
 				termInput.value = ''
 			}
 		}
@@ -73,7 +73,6 @@
 		type="text"
 		spellcheck="false"
 		bind:this={termInput}
-		bind:value={command}
 		on:keydown={handleKeypress}
 	/>
 </div>
