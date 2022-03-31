@@ -48,7 +48,7 @@
 </script>
 
 <svelte:head>
-	<title>~</title>
+	<title>Terminal</title>
 </svelte:head>
 
 <div class="terminal" on:click={() => termInput.focus()}>
