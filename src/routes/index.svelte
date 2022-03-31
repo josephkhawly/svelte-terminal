@@ -4,7 +4,7 @@
 <script>
 	import { onMount } from 'svelte'
 	import { handle } from '$lib/bin'
-	import { dateTime } from '$lib/stores'
+	import { dateTime, user, machine } from '$lib/stores'
 	import Weather from '$lib/Weather.svelte'
 
 	let history = []
@@ -55,7 +55,7 @@
 	<Weather />
 	{#each lineData as line, i (i)}
 		<span>
-			<p class="prompt">joseph@mac:$&nbsp;</p>
+			<p class="prompt">{$user}@{$machine}:$&nbsp;</p>
 			<pre class="input-old">{line.command}</pre>
 			<br />
 			{#if typeof line.output === 'string'}
@@ -67,7 +67,7 @@
 			{/if}
 		</span>
 	{/each}
-	<p class="prompt">joseph@mac:$&nbsp;</p>
+	<p class="prompt">{$user}@{$machine}:$&nbsp;</p>
 	<input
 		class="input"
 		type="text"

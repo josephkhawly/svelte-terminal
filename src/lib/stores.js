@@ -2,10 +2,10 @@ import { browser } from '$app/env'
 import { writable, readable } from 'svelte/store'
 import dayjs from 'dayjs'
 
-const userStored = browser && localStorage.getItem('userName')
+const userStored = browser && window.localStorage.getItem('userName')
 export const user = writable(userStored || 'guest')
 
-const machineStored = browser && localStorage.getItem('userMachine')
+const machineStored = browser && window.localStorage.getItem('userMachine')
 export const machine = writable(machineStored || 'start')
 
 export const dateTime = readable(dayjs().format('ddd MMM DD hh:mm:ss A'), function start(set) {

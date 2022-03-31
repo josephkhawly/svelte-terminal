@@ -1,12 +1,19 @@
 import { bookmarks } from './bookmarks'
 import { machine, user } from './stores'
 
-// const setProperty = (key, value) => {
-// 	if (value === '') return 'usage: name [newname]'
+function setUser(name) {
+	if (name === '') return 'usage: user [newname]'
 
-// 	localStorage.setItem(key, value)
-// 	return `Set ${key} to ${value}.`
-// }
+	user.set(name)
+	return `Set user to ${name}.`
+}
+
+function setMachineName(name) {
+	if (name === '') return 'usage: machine [newname]'
+
+	machine.set(name)
+	return `Set machine name to ${name}.`
+}
 
 function help() {
 	return [
@@ -31,8 +38,8 @@ const local = (args) => {
 
 const actions = {
 	echo: (input) => input,
-	user: (name) => user.set(name),
-	machine: (str) => machine.set(str),
+	user: setUser,
+	machine: setMachineName,
 	local,
 	help,
 }
