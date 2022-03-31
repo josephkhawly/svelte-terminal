@@ -4,13 +4,13 @@ export const bookmarks = {
 		cal: 'https://calendar.google.com/',
 		drive: 'https://drive.google.com/',
 		amazon: 'https://amazon.com/',
-		'amazon-jp': 'https://amazon.co.jp/'
+		'amazon-jp': 'https://amazon.co.jp/',
 	},
 
 	media: {
 		yt: 'https://youtube.com/feed/subscriptions',
 		netflix: 'https://netflix.com/',
-		plex: 'https://app.plex.tv'
+		plex: 'https://app.plex.tv',
 	},
 
 	tech: {
@@ -22,6 +22,6 @@ export const bookmarks = {
 
 	social: {
 		twitter: 'https://twitter.com/',
-		linkedin: 'https://linkedin.com/in/josephkhawly'
-	}
+		linkedin: 'https://linkedin.com/in/josephkhawly',
+	},
 }
