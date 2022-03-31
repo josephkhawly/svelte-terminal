@@ -1,28 +1,18 @@
 <!-- <script context="module">
 	export const prerender = true
 </script> -->
-
 <script>
 	import { onMount } from 'svelte'
-	import dayjs from 'dayjs'
 	import { handle } from '$lib/bin'
+	import { dateTime } from '$lib/stores'
 
-	$: timeString = () => dayjs().format('hh:mm:ss A')
-	$: dateString = () => dayjs().format('ddd MMM DD')
-	let dateTime = ''
 	let history = []
 	let lineData = []
 	let histIndex = 0
 
-	let termInput
-
-	function startTime() {
-		dateTime = `${dateString()} ${timeString()}`
-		setTimeout(startTime, 500)
-	}
+	let termInput, command
 
 	function handleKeypress(e) {
-		const command = termInput.value
 		if (e.key === 'Enter') {
 			e.preventDefault()
 			const output = handle(command)
@@ -52,7 +42,6 @@
 	}
 
 	onMount(() => {
-		startTime()
 		termInput.focus()
 	})
 </script>
@@ -76,7 +65,8 @@
 		type="text"
 		spellcheck="false"
 		bind:this={termInput}
+		bind:value={command}
 		on:keydown={handleKeypress}
 	/>
 </div>
-<div class="clock">{dateTime}</div>
+<div class="clock">{$dateTime}</div>

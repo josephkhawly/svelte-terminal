@@ -1,16 +1,18 @@
 import { browser } from '$app/env'
-import { writable } from 'svelte/store'
+import { writable, readable } from 'svelte/store'
+import dayjs from 'dayjs'
 
 const userStored = browser && localStorage.getItem('userName')
 export const user = writable(userStored || 'guest')
-user.subscribe((name) => {
-    if (browser)
-	    localStorage.setItem('userName', name)
-})
 
 const machineStored = browser && localStorage.getItem('userMachine')
 export const machine = writable(machineStored || 'start')
-machine.subscribe((name) => {
-    if (browser)
-	    localStorage.setItem('userMachine', name)
+
+export const dateTime = readable(dayjs().format('ddd MMM DD hh:mm:ss A'), function start(set) {
+	set(dayjs().format('ddd MMM DD hh:mm:ss A'))
+	const interval = setInterval(() => set(dayjs().format('ddd MMM DD hh:mm:ss A')), 1000)
+
+	return function stop() {
+		clearInterval(interval)
+	}
 })
