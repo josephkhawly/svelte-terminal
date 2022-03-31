@@ -3,7 +3,7 @@
 
     let weatherString = ''
 
-    const json_url = `http://api.openweathermap.org/data/2.5/weather?q=boulder&units=imperial&appid=${import.meta.env.VITE_WEATHER_API_KEY}`
+    const json_url = `https://api.openweathermap.org/data/2.5/weather?q=boulder&units=imperial&appid=${import.meta.env.VITE_WEATHER_API_KEY}`
 
     onMount(async () => {
         await fetch(json_url)
