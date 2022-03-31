@@ -20,6 +20,12 @@ export const bookmarks = {
 		src: 'http://github.com/josephkhawly/svelte-terminal',
 	},
 
+	work: {
+		notion: 'https://www.notion.so/',
+		jira: 'https://mwmdigital.atlassian.net/jira/projects?selectedProjectType=software',
+		bitbucket: 'https://bitbucket.org/',
+	},
+
 	social: {
 		twitter: 'https://twitter.com/',
 		linkedin: 'https://linkedin.com/in/josephkhawly',

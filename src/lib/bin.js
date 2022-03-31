@@ -65,10 +65,8 @@ export const handle = (text) => {
 		})
 
 		if (url) {
-			console.log(url)
 			if (args[0] === '-t') {
-				// Open in new tab
-				window.open(url, '_blank')
+				window.open(url, '_blank') // Open in new tab
 			} else {
 				window.location.href = url
 			}
