@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte'
 	import { handle } from '$lib/bin'
 	import { dateTime } from '$lib/stores'
+	import Weather from '$lib/Weather.svelte'
 
 	let history = []
 	let lineData = []
@@ -51,6 +52,7 @@
 </svelte:head>
 
 <div class="terminal" on:click={() => termInput.focus()}>
+	<Weather />
 	{#each lineData as line, i (i)}
 		<span>
 			<p class="prompt">joseph@mac:$&nbsp;</p>
