@@ -1,11 +1,10 @@
 export const bookmarks = {
     'general': {
-        'inbox': 'https://inbox.google.com/',
+        'inbox': 'https://mail.google.com/',
         'cal': 'https://calendar.google.com/',
         'drive': 'https://drive.google.com/',
         'amazon': 'https://amazon.com/',
         'amazon-jp': 'https://amazon.co.jp/',
-        'trello': 'https://trello.com/',
     },
 
     'media': {

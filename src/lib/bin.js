@@ -55,19 +55,18 @@ export const handle = (text) => {
 		let url
 
 		// subreddit or reddit user
-		if (text.slice(0, 3) === '/r/' || text.slice(0, 3) === '/u/')
-			url = `https://www.reddit.com${text}`
+		if (command.slice(0, 3) === '/r/' || command.slice(0, 3) === '/u/')
+			url = `https://www.reddit.com${command}`
 
 		// bookmarks
 		Object.keys(bookmarks).forEach(function (key) {
-			if (bookmarks[key][text]) url = bookmarks[key][text]
+			if (bookmarks[key][command]) url = bookmarks[key][command]
 		})
 
 		if (url) {
-			const modifier = url.substring(url.length - 3)
-			if (modifier === '-t') {
+			console.log(url)
+			if (args[0] === '-t') {
 				// Open in new tab
-				url = url.slice(0, url.length - 3) //remove " -t"
 				window.open(url, '_blank')
 			} else {
 				window.location.href = url
