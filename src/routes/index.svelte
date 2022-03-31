@@ -20,7 +20,8 @@
 			lineData[lineData.length] = { command, output }
 			termInput.value = ''
 
-			if (command === '' || /^[ ]+$/.test(command) || $history[$history.length - 1] === command) return
+			if (command === '' || /^[ ]+$/.test(command) || $history[$history.length - 1] === command)
+				return
 
 			$history[$history.length] = command
 			histIndex = $history.length
@@ -53,6 +54,7 @@
 
 <div class="terminal" on:click={() => termInput.focus()}>
 	<Weather />
+	<pre class="output">Type 'help' to learn more.</pre>
 	{#each lineData as line, i (i)}
 		<span>
 			<p class="prompt">{$user}@{$machine}:$&nbsp;</p>
