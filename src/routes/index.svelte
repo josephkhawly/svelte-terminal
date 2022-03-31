@@ -58,7 +58,13 @@
 			<p class="prompt">joseph@mac:$&nbsp;</p>
 			<pre class="input-old">{line.command}</pre>
 			<br />
-			<pre class="output">{line.output}</pre>
+			{#if typeof line.output === 'string'}
+				<pre class="output">{line.output}</pre>
+			{:else}
+				{#each line.output as out}
+					<pre class="output">{out}</pre>
+				{/each}
+			{/if}
 		</span>
 	{/each}
 	<p class="prompt">joseph@mac:$&nbsp;</p>

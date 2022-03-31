@@ -8,6 +8,13 @@ import { machine, user } from './stores'
 // 	return `Set ${key} to ${value}.`
 // }
 
+function help() {
+	return [
+		'usage: help [command]', 
+		'this is my terminal'
+	]
+}
+
 const local = (args) => {
 	if (args.length === 0) return 'usage: local [port] [flag]'
 
@@ -26,6 +33,7 @@ const actions = {
 	user: (name) => user.set(name),
 	machine: (str) => machine.set(str),
 	local,
+	help,
 }
 
 export const handle = (text) => {
