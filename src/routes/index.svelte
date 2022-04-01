@@ -64,7 +64,7 @@
 				<pre class="output">{line.output}</pre>
 			{:else}
 				{#each line.output as out}
-					<pre class="output">{out}</pre>
+					{@html out}
 				{/each}
 			{/if}
 		</span>

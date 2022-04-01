@@ -15,13 +15,35 @@ function setMachineName(name) {
 	return `Set machine name to ${name}.`
 }
 
+function print() {
+	const args = [...arguments]
+	return args.map((text) => `<pre class="output">${text}</pre>`)
+}
+
+function printWithColor(text, color) {
+	return `<pre class="output" style="color: ${color ?? 'inherit'};">${text}</pre>`
+}
+
+function ls() {
+	let output = []
+	const renderColor = '#00FF9C'
+
+	for (let i of Object.keys(bookmarks)) {
+		output.push(printWithColor(i, renderColor))
+		let k = Object.keys(bookmarks[i])
+		output.push(print(`> ${k.join(' > ')}`))
+	}
+
+	return output.flat()
+}
+
 function help() {
-	return [
+	return print(
 		'You found my terminal!',
 		"This project serves as my browser's homepage. The bookmarks are 'commands' that you can type in the terminal.",
 		"Type 'ls' to see all the commands.",
-		"Type 'src' to see the code on GitHub.",
-	]
+		"Type 'src' to see the code on GitHub."
+	)
 }
 
 const local = (args) => {
@@ -43,6 +65,7 @@ const actions = {
 	machine: setMachineName,
 	local,
 	help,
+	ls,
 }
 
 export const handle = (text) => {

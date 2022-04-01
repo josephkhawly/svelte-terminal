@@ -6,5 +6,4 @@
 
 - Search command
 - Tab autocomplete
-- ls command
 - clear command
