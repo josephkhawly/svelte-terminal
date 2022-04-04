@@ -42,7 +42,7 @@ function help() {
 		'You found my terminal!',
 		"This project serves as my browser's homepage. The bookmarks are 'commands' that you can type in the terminal.",
 		"Type 'ls' to see all the commands.",
-		"Type 'src' to see the code on GitHub."
+		"Type 'src' to see the code for this project on GitHub."
 	)
 }
 

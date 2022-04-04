@@ -18,6 +18,7 @@ export const bookmarks = {
 		speedtest: 'http://speedtest.net/',
 		mdn: 'https://developer.mozilla.org/en-US/',
 		src: 'http://github.com/josephkhawly/svelte-terminal',
+		vercel: 'https://vercel.com/',
 	},
 
 	work: {
