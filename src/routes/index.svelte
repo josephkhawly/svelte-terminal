@@ -4,6 +4,7 @@
 <script>
 	import { onMount } from 'svelte'
 	import { handle } from '$lib/bin'
+	import { keypress } from '$lib/actions'
 	import { dateTime, user, machine, history } from '$lib/stores'
 	import Weather from '$lib/Weather.svelte'
 
@@ -12,34 +13,33 @@
 
 	let termInput
 
-	function handleKeypress(e) {
-		if (e.key === 'Enter') {
-			e.preventDefault()
-			let command = termInput.value
-			const output = handle(command)
-			lineData[lineData.length] = { command, output }
-			termInput.value = ''
+	function enter() {
+		let command = termInput.value
+		const output = handle(command)
+		lineData[lineData.length] = { command, output }
+		termInput.value = ''
 
-			if (command === '' || /^[ ]+$/.test(command) || $history[$history.length - 1] === command)
-				return
+		if (command === '' || /^[ ]+$/.test(command) || $history[$history.length - 1] === command)
+			return
 
-			$history[$history.length] = command
+		$history[$history.length] = command
+		histIndex = $history.length
+	}
+
+	function arrowUp() {
+		if (histIndex === 0) return
+
+		histIndex--
+		termInput.value = $history[histIndex]
+	}
+
+	function arrowDown() {
+		if (histIndex < $history.length - 1) {
+			histIndex++
+			termInput.value = $history[histIndex]
+		} else {
 			histIndex = $history.length
-		} else if (e.key === 'ArrowUp') {
-			e.preventDefault()
-			if (histIndex > 0) {
-				histIndex--
-				termInput.value = $history[histIndex]
-			}
-		} else if (e.key === 'ArrowDown') {
-			e.preventDefault()
-			if (histIndex < $history.length - 1) {
-				histIndex++
-				termInput.value = $history[histIndex]
-			} else {
-				histIndex = $history.length
-				termInput.value = ''
-			}
+			termInput.value = ''
 		}
 	}
 
@@ -75,7 +75,10 @@
 		type="text"
 		spellcheck="false"
 		bind:this={termInput}
-		on:keydown={handleKeypress}
+		use:keypress
+		on:enterkey={enter}
+		on:arrowup|preventDefault={arrowUp}
+		on:arrowdown|preventDefault={arrowDown}
 	/>
 </div>
 <div class="clock">{$dateTime}</div>
