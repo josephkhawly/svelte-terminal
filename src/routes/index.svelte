@@ -2,50 +2,63 @@
 	export const prerender = true
 </script> -->
 <script>
-	import { onMount } from 'svelte'
-	import { handle } from '$lib/bin'
-	import { keypress } from '$lib/actions'
-	import { dateTime, user, machine, history } from '$lib/stores'
-	import Weather from '$lib/Weather.svelte'
+	import { onMount } from 'svelte';
+	import { handle, actions } from '$lib/bin';
+	import { keypress } from '$lib/actions';
+	import { dateTime, user, machine, history } from '$lib/stores';
+    import { bookmarks } from '$lib/bookmarks';
+	import Weather from '$lib/Weather.svelte';
 
-	let lineData = []
-	let histIndex = $history.length
+	let lineData = [];
+	let histIndex = $history.length;
 
-	let termInput
+	let termInput;
 
 	function enter() {
-		let command = termInput.value
-		const output = handle(command)
-		lineData[lineData.length] = { command, output }
-		termInput.value = ''
+		let command = termInput.value;
+		const output = handle(command);
+		lineData[lineData.length] = { command, output };
+		termInput.value = '';
 
-		if (command === '' || /^[ ]+$/.test(command) || $history[$history.length - 1] === command)
-			return
+		if (command === '' || /^[ ]+$/.test(command) || $history[$history.length - 1] === command) return;
 
-		$history[$history.length] = command
-		histIndex = $history.length
+		$history[$history.length] = command;
+		histIndex = $history.length;
 	}
 
 	function arrowUp() {
-		if (histIndex === 0) return
+		if (histIndex === 0) return;
 
-		histIndex--
-		termInput.value = $history[histIndex]
+		histIndex--;
+		termInput.value = $history[histIndex];
 	}
 
 	function arrowDown() {
 		if (histIndex < $history.length - 1) {
-			histIndex++
-			termInput.value = $history[histIndex]
+			histIndex++;
+			termInput.value = $history[histIndex];
 		} else {
-			histIndex = $history.length
-			termInput.value = ''
+			histIndex = $history.length;
+			termInput.value = '';
 		}
 	}
 
+	function tab() {
+        let valids = Object.keys(actions);
+        Object.values(bookmarks).map(m => valids.push(...Object.keys(m)));
+
+        valids = valids.filter((f) =>
+            f.startsWith(termInput.value)
+        );
+
+        if(valids.length === 1) {
+            console.log(valids[0])
+        }
+	}
+
 	onMount(() => {
-		termInput.focus()
-	})
+		termInput.focus();
+	});
 </script>
 
 <svelte:head>
@@ -74,9 +87,11 @@
 		class="input"
 		type="text"
 		spellcheck="false"
+        
 		bind:this={termInput}
 		use:keypress
 		on:enterkey={enter}
+        on:tabkey|preventDefault={tab}
 		on:arrowup|preventDefault={arrowUp}
 		on:arrowdown|preventDefault={arrowDown}
 	/>
