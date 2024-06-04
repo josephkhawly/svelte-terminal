@@ -6,6 +6,7 @@ export const bookmarks = {
 		drive: 'https://drive.google.com/',
 		amazon: 'https://amazon.com/',
 		'amazon-jp': 'https://amazon.co.jp/',
+		anydo: 'https://app.any.do/',
 	},
 
 	media: {
