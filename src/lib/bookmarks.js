@@ -21,6 +21,7 @@ export const bookmarks = {
 		mdn: 'https://developer.mozilla.org/en-US/',
 		src: 'http://github.com/josephkhawly/svelte-terminal',
 		vercel: 'https://vercel.com/',
+		chatgpt: 'https://chatgpt.com/',
 	},
 
 	work: {
