@@ -12,6 +12,7 @@ export const bookmarks = {
 		yt: 'https://youtube.com/feed/subscriptions',
 		netflix: 'https://netflix.com/',
 		plex: 'https://app.plex.tv',
+		spotify: 'https://open.spotify.com/',
 	},
 
 	tech: {
@@ -24,8 +25,8 @@ export const bookmarks = {
 
 	work: {
 		notion: 'https://www.notion.so/',
-		jira: 'https://mwmdigital.atlassian.net/jira/projects?selectedProjectType=software',
 		bitbucket: 'https://bitbucket.org/',
+		bamboo: 'https://brandingbrand.bamboohr.com/',
 	},
 
 	social: {
