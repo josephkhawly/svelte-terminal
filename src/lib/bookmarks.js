@@ -7,6 +7,7 @@ export const bookmarks = {
 		amazon: 'https://amazon.com/',
 		'amazon-jp': 'https://amazon.co.jp/',
 		anydo: 'https://app.any.do/',
+		gblt: 'https://goblin.tools/',
 	},
 
 	media: {
